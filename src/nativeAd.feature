@@ -16,13 +16,11 @@ Scenario: Creating a New Campaign
   When I set the start and end dates for the campaign
   And I set the budget for the campaign
   Then I should be able to proceed to the next step
-
   And Setting Targeting
   Given I am on the targeting page
   When I set the targeting criteria for the campaign
   Then I should be able to proceed to the next step
-
- And Reviewing and Paying for the Campaign
+  And Reviewing and Paying for the Campaign
   Given I am on the review and payment page
   When I review the campaign details
   And I enter the payment details
