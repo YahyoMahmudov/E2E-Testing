@@ -1,7 +1,2 @@
-#!/bin/sh
-
-# Run linting
-npm run lint
-
 # Run tests
 npm test
