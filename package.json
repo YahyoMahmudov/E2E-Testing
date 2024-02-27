@@ -4,7 +4,8 @@
   "description": "Core features that should be tested:",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js test"
+    "test": "cucumber-js test",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
