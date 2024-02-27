@@ -4,8 +4,7 @@
   "description": "Core features that should be tested:",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js test",
-    "test:no-watch": "ng test --watch=false"
+    "test": "cucumber-js test"
   },
   "keywords": [],
   "author": "",
@@ -15,10 +14,5 @@
     "@playwright/test": "^1.41.2",
     "@types/node": "^20.11.20",
     "ts-node": "^10.9.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run test:no-watch"
-    }
   }
 }
