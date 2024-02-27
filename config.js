@@ -1,5 +1,5 @@
 module.exports = {
     default: {
-      format: "./reporter",
+        format: './reporter',
     },
-  };
+}
