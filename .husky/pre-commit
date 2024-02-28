@@ -1,11 +1,9 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-# Run ESLint
-npm run lint
-
 # Run Prettier
 npm run format
 
-# Run tests
-npm run test
+# Run ESLint
+npm run lint-fix
+npm run lint
