@@ -1,7 +1,7 @@
 module.exports = {
   env: {
     node: true,
-    es6: true,
+    es6: true
   },
   extends: ['eslint:recommended'],
   parser: '@typescript-eslint/parser',
@@ -12,11 +12,12 @@ module.exports = {
     'no-console': 'error',
     'no-unused-vars': 'error',
     camelcase: 'error',
+    'comma-dangle': 'off',
     'no-trailing-spaces': 'error',
-    'max-len': ['error', { code: 120 }],
+    'max-len': ['error', { code: 140 }],
     'object-curly-spacing': ['error', 'always'],
     'arrow-spacing': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
-    '@typescript-eslint/no-unused-vars': 'error',
-  },
-}
+    '@typescript-eslint/no-unused-vars': 'error'
+  }
+};
