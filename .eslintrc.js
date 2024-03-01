@@ -1,29 +1,23 @@
 module.exports = {
-    env: {
-        browser: true,
-        es2021: true,
-    },
-    extends: 'standard-with-typescript',
-    overrides: [
-        {
-            env: {
-                node: true,
-            },
-            files: ['.eslintrc.{js,cjs}'],
-            parserOptions: {
-                sourceType: 'script',
-            },
-        },
-    ],
-    parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-    },
-
-    rules: {
-        'no-unused-vars': [
-            'error',
-            { vars: 'all', args: 'after-used', ignoreRestSiblings: false },
-        ],
-    },
-}
+  env: {
+    node: true,
+    es6: true
+  },
+  extends: ['eslint:recommended'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
+  rules: {
+    indent: ['error', 2],
+    quotes: ['error', 'single'],
+    'no-console': 'error',
+    'no-unused-vars': 'error',
+    camelcase: 'error',
+    'comma-dangle': 'off',
+    'no-trailing-spaces': 'error',
+    'max-len': ['error', { code: 140 }],
+    'object-curly-spacing': ['error', 'always'],
+    'arrow-spacing': 'error',
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/no-unused-vars': 'error'
+  }
+};
