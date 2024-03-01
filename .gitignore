@@ -4,10 +4,6 @@ node_modules/
 /test-results/
 /playwright-report/
 /blob-report/
-<<<<<<< HEAD
 /playwright/.cache/
-=======
 /playwright/.cache/
 allure-results/
-allure-report/
->>>>>>> 9a0bb8f (added script to generate a report from allure-results folder.)
