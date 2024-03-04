@@ -4,9 +4,9 @@
   "requires": true,
   "packages": {},
   "dependencies": {
+    "allure-commandline": "^2.27.0",
     "eslint-plugin-prettier": "^5.1.3",
-    "gherkin-lint": "^4.2.4",
-    "allure-commandline": "^2.27.0"
+    "gherkin-lint": "^4.2.4"
   },
   "scripts": {
     "report": "allure generate --clean allure-results -o allure-report",
@@ -15,7 +15,7 @@
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "format": "prettier --write .",
-    "pretest": "npx ts-node removeAllureFolder.ts",
+    "pretest": "rimraf allure-results",
     "posttest": "npm run report"
   },
   "devDependencies": {
@@ -24,15 +24,16 @@
     "@types/node": "^20.11.20",
     "@typescript-eslint/eslint-plugin": "^7.1.0",
     "@typescript-eslint/parser": "^7.1.0",
+    "allure-cucumberjs": "^2.13.0",
+    "cucumberjs-allure-reporter": "^1.0.3",
     "eslint": "^8.57.0",
     "eslint-plugin-cucumber": "^2.0.0",
     "eslint-plugin-playwright": "^1.5.0",
     "husky": "^9.0.11",
     "prettier": "^3.2.5",
     "ts-node": "^10.9.2",
-    "allure-cucumberjs": "^2.13.0",
-    "cucumberjs-allure-reporter": "^1.0.3",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "rimraf": "^5.0.5"
   },
   "version": "1.0.0",
   "description": "Core features that should be tested:",

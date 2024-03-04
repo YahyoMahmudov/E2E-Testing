@@ -1,5 +1,5 @@
-import { Given, When, Then } from '@cucumber/cucumber';
-import { chromium, Page, Browser, expect } from '@playwright/test';
+import {Given, When, Then} from '@cucumber/cucumber';
+import {chromium, Page, Browser, expect} from '@playwright/test';
 
 let browser: Browser;
 let page: Page;
@@ -31,8 +31,7 @@ When('User clicks Login button', async function () {
 });
 
 Then('User is in Dashboard page', async function () {
-  // eslint-disable-next-line quotes
-  const errorMessage = page.locator("(//p[@id='loginErrorMessage'])[2]");
+  const errorMessage = page.locator('(//p[@id=\'loginErrorMessage\'])[2]');
   await expect(errorMessage).toBeVisible();
   await browser.close();
 });
