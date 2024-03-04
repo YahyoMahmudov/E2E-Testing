@@ -1,8 +1,8 @@
 // reporter.js
-import {AllureRuntime} from 'allure-js-commons';
-import {CucumberJSAllureFormatter} from 'allure-cucumberjs';
+const {AllureRuntime} = require('allure-js-commons');
+const {CucumberJSAllureFormatter} = require('allure-cucumberjs');
 
-export default class extends CucumberJSAllureFormatter {
+module.exports = class extends CucumberJSAllureFormatter {
   constructor(options) {
     super(options, new AllureRuntime({resultsDir: './allure-results'}), {
       labels: [
@@ -29,4 +29,4 @@ export default class extends CucumberJSAllureFormatter {
       ]
     });
   }
-}
+};

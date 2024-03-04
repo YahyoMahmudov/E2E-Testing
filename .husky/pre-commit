@@ -4,3 +4,6 @@
 # Run Prettier
 npm run format
 
+# Run ESLint
+npm run lint-fix
+npm run lint

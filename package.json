@@ -9,12 +9,14 @@
     "allure-commandline": "^2.27.0"
   },
   "scripts": {
-    "report": "allure generate allure-results -o allure-report",
+    "report": "allure generate --clean allure-results -o allure-report",
     "test": "cucumber-js test",
     "prepare": "husky",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "pretest": "npx ts-node removeAllureFolder.ts",
+    "posttest": "npm run report"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^10.3.1",

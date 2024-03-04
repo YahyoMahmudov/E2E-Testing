@@ -1,5 +1,5 @@
-import {Given, When, Then} from '@cucumber/cucumber';
-import {chromium, Page, Browser, expect} from '@playwright/test';
+import { Given, When, Then } from '@cucumber/cucumber';
+import { chromium, Page, Browser, expect } from '@playwright/test';
 
 let browser: Browser;
 let page: Page;
@@ -15,7 +15,7 @@ Given('User clicks login button', async function () {
 });
 
 Given('User enters username', async function () {
-  await page.locator("(//input[@name='username'])[2]").fill('Username');
+  await page.locator('(//input[@name=\'username\'])[2]').fill('Username');
 });
 
 When('User enters log in with email button', async function () {
@@ -23,14 +23,15 @@ When('User enters log in with email button', async function () {
 });
 
 When('User enters password', async function () {
-  await page.locator("(//input[@name='password'])[2]").fill('Password');
+  await page.locator('(//input[@name=\'password\'])[2]').fill('Password');
 });
 
 When('User clicks Login button', async function () {
-  await page.locator("(//input[@type='Submit'])[2]").click();
+  await page.locator('(//input[@type=\'Submit\'])[2]').click();
 });
 
 Then('User is in Dashboard page', async function () {
+  // eslint-disable-next-line quotes
   const errorMessage = page.locator("(//p[@id='loginErrorMessage'])[2]");
   await expect(errorMessage).toBeVisible();
   await browser.close();
