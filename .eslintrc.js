@@ -1,4 +1,5 @@
 module.exports = {
+  ignorePatterns: ['node_modules/', 'dist/', 'allure-report'],
   env: {
     node: true,
     es6: true
@@ -11,11 +12,9 @@ module.exports = {
     quotes: ['error', 'single'],
     'no-console': 'error',
     'no-unused-vars': 'error',
-    camelcase: 'error',
     'comma-dangle': 'off',
     'no-trailing-spaces': 'error',
-    'max-len': ['error', { code: 140 }],
-    'object-curly-spacing': ['error', 'always'],
+    'max-len': ['error', {code: 140}],
     'arrow-spacing': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-unused-vars': 'error'
