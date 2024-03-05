@@ -1,37 +1,43 @@
-import {Given, When, Then} from '@cucumber/cucumber';
-import {chromium, Page, Browser, expect} from '@playwright/test';
+import { Given, When, Then } from '@cucumber/cucumber';
+import { expect } from '@playwright/test';
+import { pageFixture } from '../../hooks/pageFixture';
+import Assert from "../../helper/wrapper/assert";
+import AuthPage from '../../pages/basicAuthPage';
+import LoginPage from '../../pages/loginPage';
 
-let browser: Browser;
-let page: Page;
+let authPage: AuthPage;
+let loginPage: LoginPage;
+let assert: Assert;
 
-Given('User navigates to the application', async function () {
-  browser = await chromium.launch({headless: false});
-  page = await browser.newPage();
-  page.goto('https://px-stage.self-service.danads.com');
+Given('User passes the authorization', async function () {
+  authPage = new AuthPage(pageFixture.page);
+  assert = new Assert(pageFixture.page);
+  await authPage.authorizeUser();
+  await assert.assertTitleContains("Core Ad Manager");
 });
 
-Given('User clicks login button', async function () {
-  //await page.locator("//a/*[text()='Log in']").click();
+Given('User clicks Log in button', async function () {
+  loginPage = new LoginPage(pageFixture.page);
+  await loginPage.clickLogInButton();
 });
 
-Given('User enters username', async function () {
-  await page.locator("(//input[@name='username'])[2]").fill('Username');
+When('User enters email', async function () {
+  await loginPage.enterEmail(process.env.ADMIN_EMAIL);
 });
 
-When('User enters log in with email button', async function () {
-  //page.locator("//span[text()=' Log in with email ']").click();
+When('User clicks Log in with email button', async function () {
+  await loginPage.clickSubmitButton();
 });
 
 When('User enters password', async function () {
-  await page.locator("(//input[@name='password'])[2]").fill('Password');
+  await loginPage.enterPassword(process.env.ADMIN_PASSWORD);
 });
 
-When('User clicks Login button', async function () {
-  await page.locator("(//input[@type='Submit'])[2]").click();
+When('User clicks Submit button', async function () {
+  await loginPage.clickSubmitButton();
 });
 
 Then('User is in Dashboard page', async function () {
-  const errorMessage = page.locator("(//p[@id='loginErrorMessage'])[2]");
-  await expect(errorMessage).toBeVisible();
-  await browser.close();
+  await pageFixture.page.waitForTimeout(2000);
+  await assert.assertTitleContains("Dashboard");
 });

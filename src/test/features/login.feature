@@ -1,12 +1,12 @@
 Feature: Login
 
 Background: 
- Given User navigates to the application
- And User clicks login button
+ Given User passes the authorization
 
  Scenario: Login to Core
-        Given User enters username
-        When User enters log in with email button
+        Given User clicks Log in button
+        When User enters email
+        And User clicks Log in with email button
         And User enters password 
-        And User clicks Login button
+        And User clicks Submit button
         Then User is in Dashboard page
