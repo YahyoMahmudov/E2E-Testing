@@ -1,5 +1,4 @@
 import {Given, When, Then} from '@cucumber/cucumber';
-import {expect} from '@playwright/test';
 import {pageFixture} from '../../hooks/pageFixture';
 import Assert from '../../helper/wrapper/assert';
 import AuthPage from '../../pages/basicAuthPage';
