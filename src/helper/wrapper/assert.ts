@@ -1,31 +1,28 @@
-import { expect, Page } from "@playwright/test";
-import assert = require("assert");
-
+import {expect, Page} from '@playwright/test';
+import assert = require('assert');
 
 export default class Assert {
+  constructor(private page: Page) {}
 
-    constructor(private page: Page) { }
+  async assertTitle(title: string) {
+    await expect(this.page).toHaveTitle(title);
+  }
 
-    async assertTitle(title: string) {
-        await expect(this.page).toHaveTitle(title);
-    }
+  async assertTitleContains(title: string) {
+    const pageTitle = await this.page.title();
+    expect(pageTitle).toContain(title);
+  }
 
-    async assertTitleContains(title: string) {
-        const pageTitle = await this.page.title();
-        expect(pageTitle).toContain(title);
-    }
+  async assertURL(url: string) {
+    await expect(this.page).toHaveURL(url);
+  }
 
-    async assertURL(url: string) {
-        await expect(this.page).toHaveURL(url);
-    }
+  async assertURLContains(title: string) {
+    const pageURL = this.page.url();
+    expect(pageURL).toContain(title);
+  }
 
-    async assertURLContains(title: string) {
-        const pageURL = this.page.url();
-        expect(pageURL).toContain(title);
-    }
-
-    async waitForElementToBeVisible(element:string){
-        await expect(this.page.locator(element)).toBeVisible();
-    }
-
+  async waitForElementToBeVisible(element: string) {
+    await expect(this.page.locator(element)).toBeVisible();
+  }
 }
