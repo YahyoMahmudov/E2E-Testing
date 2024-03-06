@@ -10,9 +10,3 @@ allure-results/
 allure-report
 .vscode/
 src\helper\env\.env
-
-
-
-
-
-

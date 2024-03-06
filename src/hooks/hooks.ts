@@ -9,7 +9,7 @@ let context: BrowserContext;
 
 BeforeAll(async function () {
   getEnv();
-  browser = await invokeBrowser();
+  browser = await invokeBrowser(false);
 });
 
 Before(async function () {

@@ -1,18 +1,14 @@
-import {LaunchOptions, chromium, firefox, webkit} from '@playwright/test';
+import { chromium, firefox, webkit } from '@playwright/test';
 
-const options: LaunchOptions = {
-  headless: false
-};
-
-export const invokeBrowser = () => {
+export const invokeBrowser = (isHeadless: boolean) => {
   const browserType = process.env.BROWSER;
   switch (browserType) {
     case 'chrome':
-      return chromium.launch(options);
+      return chromium.launch({ headless: isHeadless });
     case 'firefox':
-      return firefox.launch(options);
+      return firefox.launch({ headless: isHeadless });
     case 'webkit':
-      return webkit.launch(options);
+      return webkit.launch({ headless: isHeadless });
     default:
       throw new Error('Please set the proper browser');
   }
