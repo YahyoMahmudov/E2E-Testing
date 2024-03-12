@@ -1,6 +1,10 @@
 import {Page} from '@playwright/test';
 
 export const pageFixture = {
-  // @ts-ignore
-  page: undefined as Page
+  page: undefined as Page | undefined,
+
+  // Function to initialize the page fixture
+  initialize(page: Page) {
+    this.page = page;
+  }
 };

@@ -1,29 +1,27 @@
 import {Page} from '@playwright/test';
 import PlaywrightWrapper from '../helper/wrapper/playwrightWrappers';
 
-export default class LoginPage {
+export default class LoginPage{
   private base: PlaywrightWrapper;
 
   constructor(private page: Page) {
     this.base = new PlaywrightWrapper(page);
   }
 
-  public elements = {
-    logInBtn: "//a/span[text()='Log in']",
-    emailInput: "//input[@name='email']",
-    passwordInput: "//input[@name='password']",
-    submitBtn: "//button[@type='submit']"
-  };
+  logInBtn = this.page.locator("//a/span[text()='Log in']");
+  emailInput = this.page.locator("//input[@name='email']");
+  passwordInput = this.page.locator("//input[@name='password']");
+  submitBtn = this.page.locator("//button[@type='submit']");
 
   async logIn(email: string, password: string) {
-    await this.base.waitAndClick(this.elements.logInBtn);
+    await this.base.waitAndClick(this.logInBtn);
 
-    await this.page.fill(this.elements.emailInput, email);
+    await this.emailInput.fill(email);
 
-    await this.base.waitAndClick(this.elements.submitBtn);
+    await this.base.waitAndClick(this.submitBtn);
 
-    await this.page.fill(this.elements.passwordInput, password);
+    await this.passwordInput.fill(password);
 
-    await this.base.waitAndClick(this.elements.submitBtn);
+    await this.base.waitAndClick(this.submitBtn);
   }
 }

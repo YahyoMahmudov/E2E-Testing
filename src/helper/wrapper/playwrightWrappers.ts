@@ -1,4 +1,5 @@
-import {Page} from '@playwright/test';
+import {Locator, Page} from '@playwright/test';
+import { pageFixture } from '../../hooks/pageFixture';
 
 export default class PlaywrightWrapper {
   constructor(private page: Page) {}
@@ -9,13 +10,21 @@ export default class PlaywrightWrapper {
     });
   }
 
-  async waitAndClick(locator: string) {
-    const element = this.page.locator(locator);
-    await element.waitFor({
+  async waitAndClick(locator: Locator) {
+    //const element = this.page.locator(locator);
+    await locator.waitFor({
       state: 'visible',
       timeout: 5000
     });
-    await element.click();
+    await locator.click();
+  }
+
+  async type(locator: Locator, word:string){
+    await locator.waitFor({
+      state: 'visible',
+      timeout: 5000
+    });
+    await locator.fill(word);
   }
 
   async navigateTo(link: string) {

@@ -1,8 +1,9 @@
-import {Before, After, BeforeAll, AfterAll, Status} from '@cucumber/cucumber';
-import {Browser, BrowserContext} from '@playwright/test';
-import {pageFixture} from './pageFixture';
-import {invokeBrowser} from '../helper/browsers/browserManager';
-import {getEnv} from '../helper/env/env';
+import { Before, After, BeforeAll, AfterAll, Status } from '@cucumber/cucumber';
+import { Browser, BrowserContext } from '@playwright/test';
+import { pageFixture } from './pageFixture';
+import { invokeBrowser } from '../helper/browsers/browserManager';
+import { getEnv } from '../helper/env/env';
+import basePage from '../pages/basePage';
 
 let browser: Browser;
 let context: BrowserContext;
@@ -16,6 +17,7 @@ Before(async function () {
   context = await browser.newContext();
   const page = await context.newPage();
   pageFixture.page = page;
+  await basePage.createInstances();
 });
 
 After(async function () {
