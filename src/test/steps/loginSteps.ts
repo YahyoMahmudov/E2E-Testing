@@ -1,42 +1,51 @@
 import {Given, When, Then} from '@cucumber/cucumber';
 import {pageFixture} from '../../hooks/pageFixture';
-import Assert from '../../helper/wrapper/assert';
+import {expect} from '@playwright/test';
 import AuthPage from '../../pages/basicAuthPage';
 import LoginPage from '../../pages/loginPage';
-
+//import { loginPage } from '../../pages/pageInstance';
+//import { authPage } from '../../pages/pageInstance';
 let authPage: AuthPage;
 let loginPage: LoginPage;
-let assert: Assert;
 
 Given('User passes the authorization', async function () {
   authPage = new AuthPage(pageFixture.page);
-  assert = new Assert(pageFixture.page);
   await authPage.authorizeUser();
-  await assert.assertTitleContains('Core Ad Manager');
+
+  const pageTitle = await pageFixture.page.title();
+  expect(pageTitle).toContain('Core Ad Manager');
 });
 
 Given('User clicks Log in button', async function () {
   loginPage = new LoginPage(pageFixture.page);
-  await loginPage.clickLogInButton();
+  console.log(loginPage.elements.logInBtn);
+
+  await pageFixture.page.waitForSelector(loginPage.elements.logInBtn, {timeout: 30000});
+  await pageFixture.page.locator(loginPage.elements.logInBtn).click();
 });
 
 When('User enters email', async function () {
-  await loginPage.enterEmail(process.env.ADMIN_EMAIL);
+  await pageFixture.page.waitForSelector(loginPage.elements.emailInput, {timeout: 30000});
+  await pageFixture.page.locator(loginPage.elements.emailInput).fill(process.env.ADMIN_EMAIL);
 });
 
 When('User clicks Log in with email button', async function () {
-  await loginPage.clickSubmitButton();
+  await pageFixture.page.waitForSelector(loginPage.elements.submitBtn, {timeout: 30000});
+  await pageFixture.page.locator(loginPage.elements.submitBtn).click();
 });
 
 When('User enters password', async function () {
-  await loginPage.enterPassword(process.env.ADMIN_PASSWORD);
+  await pageFixture.page.waitForSelector(loginPage.elements.passwordInput, {timeout: 30000});
+  await pageFixture.page.locator(loginPage.elements.passwordInput).fill(process.env.ADMIN_PASSWORD);
 });
 
 When('User clicks Submit button', async function () {
-  await loginPage.clickSubmitButton();
+  await pageFixture.page.waitForSelector(loginPage.elements.submitBtn, {timeout: 30000});
+  await pageFixture.page.locator(loginPage.elements.submitBtn).click();
 });
 
 Then('User is in Dashboard page', async function () {
-  await pageFixture.page.waitForTimeout(2000);
-  await assert.assertTitleContains('Dashboard');
+  await pageFixture.page.waitForURL(process.env.DASHBOARD_PAGE_URL, {timeout: 30000});
+  const pageTitle = await pageFixture.page.title();
+  expect(pageTitle).toContain('Dashboard');
 });

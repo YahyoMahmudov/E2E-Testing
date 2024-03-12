@@ -12,7 +12,8 @@ export default class PlaywrightWrapper {
   async waitAndClick(locator: string) {
     const element = this.page.locator(locator);
     await element.waitFor({
-      state: 'visible'
+      state: 'visible',
+      timeout: 5000
     });
     await element.click();
   }

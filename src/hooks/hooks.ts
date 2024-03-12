@@ -24,5 +24,5 @@ After(async function () {
 });
 
 AfterAll(async function () {
-  browser.close();
+  await browser.close();
 });

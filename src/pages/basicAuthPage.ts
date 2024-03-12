@@ -1,10 +1,8 @@
 import {expect, Page} from '@playwright/test';
 import PlaywrightWrapper from '../helper/wrapper/playwrightWrappers';
-import Assert from '../helper/wrapper/assert';
 
 export default class BasicAuthPage {
   private base: PlaywrightWrapper;
-  private assert: Assert;
 
   constructor(private page: Page) {
     this.base = new PlaywrightWrapper(page);
