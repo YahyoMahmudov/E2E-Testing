@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import {Page} from '@playwright/test';
 import PlaywrightWrapper from '../helper/wrapper/playwrightWrappers';
 import basePage from './basePage';
 
@@ -27,6 +27,14 @@ export default class LoginPage {
         email = process.env.PUBLISHER_EMAIL;
         password = process.env.PUBLISHER_PASSWORD;
         break;
+      case 'advertiser':
+          email = process.env.ADVERTISER_EMAIL;
+          password = process.env.ADVERTISER_PASSWORD;
+          break;
+      case 'agency':
+          email = process.env.AGENCY_EMAIL;
+          password = process.env.AGENCY_PASSWORD;
+          break;
       default:
         throw new Error(`Unsupported user role: ${userRole}`);
     }

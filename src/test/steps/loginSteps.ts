@@ -17,14 +17,6 @@ When('User enters email and password as a {string}', async function (userRole: s
   basePage.loginPage.enterUsernameAndPassowrd(userRole);
 });
 
-/* When('User clicks Log in with email button', async function () {
-  await basePage.wrapper.waitAndClick(basePage.loginPage.submitBtn);
-});
-
-When('User enters password', async function () {
-  await basePage.wrapper.type(basePage.loginPage.passwordInput, process.env.ADMIN_PASSWORD);
-}); */
-
 When('User clicks Submit button', async function () {
   await basePage.wrapper.waitAndClick(basePage.loginPage.submitBtn);
 });
