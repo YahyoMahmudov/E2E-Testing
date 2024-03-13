@@ -5,7 +5,7 @@ Background:
 
  Scenario: Login to Core
         Given User clicks Log in button
-        When User enters email
+        When User enters email as a "admin"
         And User clicks Log in with email button
         And User enters password 
         And User clicks Submit button
