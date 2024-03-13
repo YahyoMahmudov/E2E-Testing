@@ -1,4 +1,4 @@
-import {Page} from '@playwright/test';
+import { Page } from '@playwright/test';
 import PlaywrightWrapper from '../helper/wrapper/playwrightWrappers';
 
 export default class LoginPage {

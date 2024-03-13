@@ -1,17 +1,19 @@
 import PlaywrightWrapper from '../helper/wrapper/playwrightWrappers';
-import {pageFixture} from '../hooks/pageFixture';
+import { Page } from '@playwright/test';
 import AuthPage from './basicAuthPage';
 import LoginPage from './loginPage';
 
 class BasePage {
+  page = null;
   wrapper: PlaywrightWrapper;
   authPage: AuthPage;
   loginPage: LoginPage;
 
-  public createInstances() {
-    this.wrapper = new PlaywrightWrapper(pageFixture.page);
-    this.authPage = new AuthPage(pageFixture.page);
-    this.loginPage = new LoginPage(pageFixture.page);
+  public createInstances(page: Page) {
+    this.page = page;
+    this.wrapper = new PlaywrightWrapper(page);
+    this.authPage = new AuthPage(page);
+    this.loginPage = new LoginPage(page);
   }
 }
 

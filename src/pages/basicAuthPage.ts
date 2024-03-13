@@ -18,7 +18,7 @@ export default class BasicAuthPage {
     await expect(this.page).toHaveTitle('Signin');
 
     await this.base.type(this.usernameInput, process.env.USERNAME);
-    
+
     await this.base.type(this.passwordInput, process.env.PASSWORD);
 
     await this.base.waitAndClick(this.signInBtn);
