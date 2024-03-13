@@ -5,8 +5,6 @@ Background:
 
  Scenario: Login to Core
         Given User clicks Log in button
-        When User enters email as a "admin"
-        And User clicks Log in with email button
-        And User enters password 
+        When User enters email and password as a "admin"
         And User clicks Submit button
         Then User is in Dashboard page
