@@ -11,32 +11,28 @@ Given('User passes the authorization', async function () {
 });
 
 Given('User clicks Log in button', async function () {
-  await basePage.loginPage.logInBtn.waitFor({state: 'visible', timeout: 30000});
-  await basePage.loginPage.logInBtn.click();
+  await basePage.wrapper.waitAndClick(basePage.loginPage.logInBtn);
 });
 
 When('User enters email', async function () {
-  await basePage.loginPage.emailInput.waitFor({state: 'visible', timeout: 30000});
-  await basePage.loginPage.emailInput.fill(process.env.ADMIN_EMAIL);
+  await basePage.wrapper.type(basePage.loginPage.emailInput, process.env.ADMIN_EMAIL)
 });
 
 When('User clicks Log in with email button', async function () {
-  await basePage.loginPage.emailInput.waitFor({state: 'visible', timeout: 30000});
-  await basePage.loginPage.submitBtn.click();
+  await basePage.wrapper.waitAndClick(basePage.loginPage.submitBtn);
 });
 
 When('User enters password', async function () {
-  await basePage.loginPage.passwordInput.waitFor({state: 'visible', timeout: 30000});
-  await basePage.loginPage.passwordInput.fill(process.env.ADMIN_PASSWORD);
+  await basePage.wrapper.type(basePage.loginPage.passwordInput, process.env.ADMIN_PASSWORD);
 });
 
 When('User clicks Submit button', async function () {
-  await basePage.loginPage.submitBtn.waitFor({state: 'visible', timeout: 30000});
-  await basePage.loginPage.submitBtn.click();
+  await basePage.wrapper.waitAndClick(basePage.loginPage.submitBtn);
 });
 
 Then('User is in Dashboard page', async function () {
-  await pageFixture.page.waitForURL(process.env.DASHBOARD_PAGE_URL, {timeout: 30000});
+  await basePage.wrapper.waitForUrl(process.env.DASHBOARD_PAGE_URL)
+
   const pageTitle = await pageFixture.page.title();
   expect(pageTitle).toContain('Dashboard');
 });

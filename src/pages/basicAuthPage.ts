@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import PlaywrightWrapper from '../helper/wrapper/playwrightWrappers';
 
 export default class BasicAuthPage {
@@ -16,8 +16,10 @@ export default class BasicAuthPage {
     await this.base.goto(process.env.BASEURL);
 
     await expect(this.page).toHaveTitle('Signin');
-    await this.usernameInput.fill(process.env.USERNAME);
-    await this.passwordInput.fill(process.env.PASSWORD);
+
+    await this.base.type(this.usernameInput, process.env.USERNAME);
+    
+    await this.base.type(this.passwordInput, process.env.PASSWORD);
 
     await this.base.waitAndClick(this.signInBtn);
   }

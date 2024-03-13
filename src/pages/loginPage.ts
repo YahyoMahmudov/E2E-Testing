@@ -1,7 +1,7 @@
 import {Page} from '@playwright/test';
 import PlaywrightWrapper from '../helper/wrapper/playwrightWrappers';
 
-export default class LoginPage{
+export default class LoginPage {
   private base: PlaywrightWrapper;
 
   constructor(private page: Page) {
@@ -16,11 +16,11 @@ export default class LoginPage{
   async logIn(email: string, password: string) {
     await this.base.waitAndClick(this.logInBtn);
 
-    await this.emailInput.fill(email);
+    await this.base.type(this.emailInput, email);
 
     await this.base.waitAndClick(this.submitBtn);
 
-    await this.passwordInput.fill(password);
+    await this.base.type(this.passwordInput, password);
 
     await this.base.waitAndClick(this.submitBtn);
   }
