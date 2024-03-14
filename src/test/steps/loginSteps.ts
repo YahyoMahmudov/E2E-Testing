@@ -1,37 +1,26 @@
-import {Given, When, Then} from '@cucumber/cucumber';
-import {chromium, Page, Browser, expect} from '@playwright/test';
+import { Given, When, Then } from '@cucumber/cucumber';
+import { expect } from '@playwright/test';
+import basePage from '../../pages/basePage';
 
-let browser: Browser;
-let page: Page;
+Given('User passes the authorization', async function () {
+  await basePage.authPage.authorizeUser();
 
-Given('User navigates to the application', async function () {
-  browser = await chromium.launch({headless: false});
-  page = await browser.newPage();
-  page.goto('https://px-stage.self-service.danads.com');
+  const pageTitle = await basePage.page.title();
+  expect(pageTitle).toContain('Core Ad Manager');
 });
 
-Given('User clicks login button', async function () {
-  //await page.locator("//a/*[text()='Log in']").click();
+Given('User is in landing page', async function () {
+  const pageTitle = await basePage.page.title();
+  expect(pageTitle).toContain('Core Ad Manager');
 });
 
-Given('User enters username', async function () {
-  await page.locator('(//input[@name=\'username\'])[2]').fill('Username');
-});
-
-When('User enters log in with email button', async function () {
-  //page.locator("//span[text()=' Log in with email ']").click();
-});
-
-When('User enters password', async function () {
-  await page.locator('(//input[@name=\'password\'])[2]').fill('Password');
-});
-
-When('User clicks Login button', async function () {
-  await page.locator('(//input[@type=\'Submit\'])[2]').click();
+When('User logins as a {string}', async function (userRole: string) {
+  await basePage.loginPage.logIn(userRole);
 });
 
 Then('User is in Dashboard page', async function () {
-  const errorMessage = page.locator('(//p[@id=\'loginErrorMessage\'])[2]');
-  await expect(errorMessage).toBeVisible();
-  await browser.close();
+  await basePage.wrapper.waitForUrl(process.env.DASHBOARD_PAGE_URL);
+
+  const pageTitle = await basePage.page.title();
+  expect(pageTitle).toContain('Dashboard');
 });

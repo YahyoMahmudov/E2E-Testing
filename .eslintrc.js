@@ -14,7 +14,7 @@ module.exports = {
     'no-unused-vars': 'error',
     'comma-dangle': 'off',
     'no-trailing-spaces': 'error',
-    'max-len': ['error', {code: 140}],
+    'max-len': ['error', { code: 140 }],
     'arrow-spacing': 'error',
     '@typescript-eslint/no-explicit-any': 'error',
     '@typescript-eslint/no-unused-vars': 'error'
