@@ -15,11 +15,8 @@ export default class LoginPage {
   submitBtn = this.page.locator("//button[@type='submit']");
 
   async logIn(userRole: string) {
-    let email: string;
-    let password: string;
-
-    email = process.env[`${userRole.toUpperCase()}_EMAIL`];
-    password = process.env[`${userRole.toUpperCase()}_PASSWORD`];
+    let email = process.env[`${userRole.toUpperCase()}_EMAIL`];
+    let password = process.env[`${userRole.toUpperCase()}_PASSWORD`];
 
     await this.base.waitAndClick(basePage.loginPage.logInBtn);
 

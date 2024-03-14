@@ -1,4 +1,4 @@
-import {Locator, Page} from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
 
 export default class PlaywrightWrapper {
   constructor(private page: Page) {}
@@ -30,6 +30,6 @@ export default class PlaywrightWrapper {
   }
 
   async waitForUrl(link: string) {
-    await this.page.waitForURL(link, {timeout: 30000});
+    await this.page.waitForURL(link, { timeout: 30000 });
   }
 }

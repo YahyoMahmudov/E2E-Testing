@@ -1,5 +1,5 @@
-import {Given, When, Then} from '@cucumber/cucumber';
-import {expect} from '@playwright/test';
+import { Given, When, Then } from '@cucumber/cucumber';
+import { expect } from '@playwright/test';
 import basePage from '../../pages/basePage';
 
 Given('User passes the authorization', async function () {
