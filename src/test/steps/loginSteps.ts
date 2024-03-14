@@ -9,16 +9,13 @@ Given('User passes the authorization', async function () {
   expect(pageTitle).toContain('Core Ad Manager');
 });
 
-Given('User clicks Log in button', async function () {
-  await basePage.wrapper.waitAndClick(basePage.loginPage.logInBtn);
+Given('User is in landing page', async function () {
+  const pageTitle = await basePage.page.title();
+  expect(pageTitle).toContain('Core Ad Manager');
 });
 
-When('User enters email and password as a {string}', async function (userRole: string) {
-  basePage.loginPage.enterUsernameAndPassowrd(userRole);
-});
-
-When('User clicks Submit button', async function () {
-  await basePage.wrapper.waitAndClick(basePage.loginPage.submitBtn);
+When('User logins as a {string}', async function (userRole: string) {
+  await basePage.loginPage.logIn(userRole);
 });
 
 Then('User is in Dashboard page', async function () {
