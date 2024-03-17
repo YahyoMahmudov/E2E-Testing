@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 
 export default class PlaywrightWrapper {
-  constructor(private page: Page) {}
+  constructor(private page: Page) { }
 
   async goto(url: string) {
     await this.page.goto(url, {
@@ -19,16 +19,15 @@ export default class PlaywrightWrapper {
 
   async type(locator: Locator, word: string) {
     await locator.waitFor({
-      state: 'visible',
+      state: 'attached',
       timeout: 30000
     });
     await locator.fill(word);
   }
-
   async navigateTo(link: string) {
     await Promise.all([this.page.waitForNavigation(), this.page.click(link)]);
   }
-
+  
   async waitForUrl(link: string) {
     await this.page.waitForURL(link, { timeout: 30000 });
   }
