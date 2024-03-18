@@ -18,4 +18,3 @@ When('User clicks navigate to sign up page', async function () {
 When('I fill out the account registration form with valid information', async function () {
   await basePage.signUpPage.registerUser();
 });
-
