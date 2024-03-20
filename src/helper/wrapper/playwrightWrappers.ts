@@ -19,7 +19,7 @@ export default class PlaywrightWrapper {
 
   async type(locator: Locator, word: string) {
     await locator.waitFor({
-      state: 'attached',
+      state: 'visible',
       timeout: 30000
     });
     await locator.fill(word);
