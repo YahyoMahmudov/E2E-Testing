@@ -1,11 +1,10 @@
-const path = require('path');
-
 module.exports = {
   default: {
+    tags: '@report',
     formatOptions: {
       snippetInterface: 'async-await'
     },
-    format: [path.resolve(__dirname, 'reporter.js')],
+    format: ['./reporter.js'],
 
     paths: ['src/test/features/'],
     dryRun: false,
