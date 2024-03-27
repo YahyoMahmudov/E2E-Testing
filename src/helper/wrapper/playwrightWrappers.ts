@@ -24,7 +24,6 @@ export default class PlaywrightWrapper {
     });
     await locator.fill(word);
   }
-
   async navigateTo(link: string) {
     await Promise.all([this.page.waitForNavigation(), this.page.click(link)]);
   }

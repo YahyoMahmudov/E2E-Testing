@@ -12,6 +12,7 @@
   "scripts": {
     "report": "allure generate --clean allure-results -o allure-report",
     "test": "cucumber-js test",
+    "test-watch": "cucumber-js test --watch",
     "prepare": "husky",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
