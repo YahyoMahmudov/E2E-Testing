@@ -24,6 +24,7 @@ export default class ReportsPage {
   lastMonth = this.page.locator("//button[text()='Last Month']");
   last3Month = this.page.locator("//button[text()='Last 3 months']");
   allPeriod = this.page.locator("//button[text()='All period']");
+  statusLabel = this.page.locator("//tbody//tr[1]/td[7]/*");
 
   async selectReportType(type: string) {
     switch (type) {
