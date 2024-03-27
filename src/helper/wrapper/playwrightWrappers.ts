@@ -43,16 +43,13 @@ export default class PlaywrightWrapper {
     });
   }
 
-  async waitForElementText(
-    element: Locator,
-    expectedText: string,
-  ): Promise<boolean> {
+  async waitForElementText(element: Locator, expectedText: string): Promise<boolean> {
     const isTextMatch = async () => {
       if (!element) return false;
       const elementText = await element.innerText();
       return elementText.trim() === expectedText;
     };
-  
+
     const startTime = Date.now();
     while (Date.now() - startTime < 15000) {
       if (await isTextMatch()) {
@@ -60,8 +57,7 @@ export default class PlaywrightWrapper {
       }
       await this.page.waitForTimeout(1000);
     }
-  
+
     return false;
   }
-
 }

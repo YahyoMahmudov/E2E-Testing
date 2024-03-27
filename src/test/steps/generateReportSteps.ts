@@ -43,7 +43,7 @@ When('User clicks Save button', async function () {
 });
 
 Then('Report is generated', async function () {
-  await basePage.wrapper.waitForElementText(basePage.reportsPage.statusLabel, 'COMPLETED')
+  await basePage.wrapper.waitForElementText(basePage.reportsPage.statusLabel, 'COMPLETED');
 
   const status = await basePage.reportsPage.statusLabel.innerText();
   expect(status).toEqual('COMPLETED');
