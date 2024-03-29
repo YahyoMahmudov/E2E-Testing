@@ -2,19 +2,18 @@
 Feature: Report
 
 Background: 
- Given User passes the authorization
+ Given User passes the authorization on "Auth Page"
 
  Scenario: Generate a new report
-        Given User is in landing page
         When User logins as a "admin"
-        Then User is in Dashboard page
-        When User navigates to Reports tab
-        And User clicks New Report button
-        And User chooses "Advertisers" report type
-        And User enters report name as "New test automation report"
-        And User selects date format as "MM/DD/YYYY"
-        And User chooses export option as "Direct"
-        And User enters time period as "week"
-        And User clicks Save button
+        Then User is in "Dashboard" page
+        When User navigates to "Reports Tab" from "Dashboard Page"
+        And User clicks "New Report Button" on "Reports Page"
+        And User chooses "Advertisers" for "Report Type"
+        And User enters "Report Name Input" as "New test automation report" on "Reports Page"
+        And User chooses "MM/DD/YYYY" for "Report Date" 
+        And User chooses "Direct" for "Export Option" 
+        And User chooses "week" for "Time Period" 
+        And User clicks "Save Button" on "Reports Page"
         Then Report is generated 
 

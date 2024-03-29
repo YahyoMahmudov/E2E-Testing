@@ -1,49 +1,31 @@
-import { Given, When, Then } from '@cucumber/cucumber';
+import { When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import basePage from '../../pages/basePage';
 
-When('User navigates to Reports tab', async function () {
-  await basePage.dashboardPage.reportsTab.click();
-
-  const pageTitle = await basePage.page.title();
-  expect(pageTitle).toContain('Reports');
+When('User navigates to {string} from {string}', async function (tab, page) {
+  const tabName = await basePage.wrapper.toCamelCase(tab);
+  const pageName = await basePage.wrapper.toCamelCase(page);
+  await basePage[pageName][tabName].click();
 });
 
-When('User clicks New Report button', async function () {
-  await basePage.wrapper.waitAndClick(basePage.reportsPage.newReportBtn);
+When('User clicks {string} on {string}', async function (button, page) {
+  const buttonName = await basePage.wrapper.toCamelCase(button);
+  const pageName = await basePage.wrapper.toCamelCase(page);
+  await basePage.wrapper.waitAndClick(basePage[pageName][buttonName]);
 });
 
-When('User chooses {string} report type', async function (reportType) {
-  await basePage.reportsPage.selectReportType(reportType);
+When('User chooses {string} for {string}', async function (value, type) {
+  await basePage.reportsPage.selectReportOption(value, type);
 });
 
-When('User enters report name as {string}', async function (reportName) {
-  await basePage.wrapper.type(basePage.reportsPage.reportNameInput, reportName);
-});
-
-When('User selects date format as {string}', async function (dateFormat) {
-  await basePage.wrapper.waitAndClick(basePage.reportsPage.dateFormatInput);
-  await basePage.reportsPage.selectDropdownOption(dateFormat);
-});
-
-When('User chooses export option as {string}', async function (exportOption) {
-  await basePage.wrapper.scrollDown();
-
-  await basePage.wrapper.waitAndClick(basePage.reportsPage.exportOptionsInput);
-  await basePage.reportsPage.selectDropdownOption(exportOption);
-});
-
-When('User enters time period as {string}', async function (date) {
-  await basePage.wrapper.waitAndClick(basePage.reportsPage.startDateInput);
-  await basePage.reportsPage.selectReportDate(date);
-});
-
-When('User clicks Save button', async function () {
-  await basePage.wrapper.waitAndClick(basePage.reportsPage.saveBtn);
+When('User enters {string} as {string} on {string}', async function (placeholder, input, page) {
+  const placeholderName = await basePage.wrapper.toCamelCase(placeholder);
+  const pageName = await basePage.wrapper.toCamelCase(page);
+  await basePage.wrapper.type(basePage[pageName][placeholderName], input);
 });
 
 Then('Report is generated', async function () {
-  await basePage.wrapper.waitForElementText(basePage.reportsPage.statusLabel, 'COMPLETED');
+  await basePage.wrapper.waitForElementTextVisible(basePage.reportsPage.statusLabel, 'COMPLETED');
 
   const status = await basePage.reportsPage.statusLabel.innerText();
   expect(status).toEqual('COMPLETED');

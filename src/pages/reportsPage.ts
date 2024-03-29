@@ -8,71 +8,51 @@ export default class ReportsPage {
     this.base = new PlaywrightWrapper(page);
   }
 
-  newReportBtn = this.page.locator("//button//span[text()=' New Report ']");
+  newReportButton = this.page.locator("//button//span[text()=' New Report ']");
   reportsLabel = this.page.locator("//div[text()=' Report details ']");
   advertisersBtn = this.page.locator("//div[@data-element='radio-group-report-general-section']/*[1]/label");
-  ordersBtn = this.page.locator("//div[@data-element='radio-group-report-general-section']/*[2]/label");
-  campaignsBtn = this.page.locator("//div[@data-element='radio-group-report-general-section']/*[3]/label");
   reportNameInput = this.page.locator("//input[@name='Report name']");
   dateFormatInput = this.page.locator("//input[@name='Date format' and @class='el-input__inner']");
   companiesInput = this.page.locator("(//div[@data-element='publisher-report-company']//input)[1]");
   startDateInput = this.page.locator("//input[@name='T']");
   endDateInput = this.page.locator("//input[@name='T']");
   exportOptionsInput = this.page.locator("//input[@name='Export options' and @class='el-input__inner']");
-  saveBtn = this.page.locator("//button//span[text()=' Save ']");
-  lastWeek = this.page.locator("//button[text()='Last week']");
-  lastMonth = this.page.locator("//button[text()='Last Month']");
-  last3Month = this.page.locator("//button[text()='Last 3 months']");
-  allPeriod = this.page.locator("//button[text()='All period']");
+  dateFormatMM = this.page.locator("//span[contains(text(),'MM/DD/YYYY')]");
+  exportOptionDirect = this.page.locator("//span[contains(text(),'Direct')]");
+  saveButton = this.page.locator("//button//span[text()=' Save ']");
+  lastWeek = this.page.locator("//button[text()='Last week']")
   statusLabel = this.page.locator('//tbody//tr[1]/td[7]/*');
 
-  async selectReportType(type: string) {
-    switch (type) {
-      case 'Advertisers': {
-        await this.base.waitAndClick(this.advertisersBtn);
-        break;
+  async selectReportOption(optionValue: string, optionType: string) {
+    const optionMap = {
+      reportType: {
+        'Advertisers': { option: this.advertisersBtn }
+      },
+      dateFormat: {
+        'MM/DD/YYYY': { option: this.dateFormatMM, button: this.dateFormatInput }
+      },
+      timePeriod: {
+        'week': { option: this.lastWeek, button: this.startDateInput },
+      },
+      exportOption: {
+        'Direct' : { option: this.exportOptionDirect, button: this.exportOptionsInput }
       }
-      case 'Orders': {
-        await this.base.waitAndClick(this.ordersBtn);
-        break;
-      }
-      case 'Campaigns': {
-        await this.base.waitAndClick(this.campaignsBtn);
-        break;
-      }
-      default: {
-        console.error(`Unsupported report type: ${type}`);
-        break;
-      }
-    }
-  }
+    };
 
-  async selectDropdownOption(format: string) {
-    await this.base.waitAndClick(this.page.locator(`//span[contains(text(),'${format}')]`));
-  }
-
-  async selectReportDate(date: string) {
-    switch (date) {
-      case 'week': {
-        await this.base.waitAndClick(this.lastWeek);
-        break;
+    try {
+      const type = await this.base.toCamelCase(optionType);
+      const selectors = optionMap[type];
+      if (selectors && selectors[optionValue]) {
+        const { option, button } = selectors[optionValue];
+        if (button) {
+          await this.base.waitAndClick(button);
+        }
+        await this.base.waitAndClick(option); 
+      } else {
+        console.error(`Unsupported option type: ${optionType} or value: ${optionValue}`);
       }
-      case 'month': {
-        await this.base.waitAndClick(this.lastMonth);
-        break;
-      }
-      case '3 month': {
-        await this.base.waitAndClick(this.last3Month);
-        break;
-      }
-      case 'all': {
-        await this.base.waitAndClick(this.allPeriod);
-        break;
-      }
-      default: {
-        console.error(`Unsupported report type: ${date}`);
-        break;
-      }
+    } catch (error) {
+      console.error(`Failed to select option: ${optionType} - ${optionValue}`, error);
     }
   }
 }

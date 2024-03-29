@@ -1,7 +1,7 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 
 export default class PlaywrightWrapper {
-  constructor(private page: Page) {}
+  constructor(private page: Page) { }
 
   async goto(url: string) {
     await this.page.goto(url, {
@@ -11,7 +11,7 @@ export default class PlaywrightWrapper {
 
   async waitAndClick(locator: Locator) {
     await locator.waitFor({
-      state: 'attached',
+      state: 'visible',
       timeout: 30000
     });
     await locator.click();
@@ -19,7 +19,7 @@ export default class PlaywrightWrapper {
 
   async type(locator: Locator, word: string) {
     await locator.waitFor({
-      state: 'attached',
+      state: 'visible',
       timeout: 30000
     });
     await locator.fill(word);
@@ -33,17 +33,18 @@ export default class PlaywrightWrapper {
     await this.page.waitForURL(link, { timeout: 30000 });
   }
 
-  async pressEnter() {
-    await this.page.keyboard.press('Enter');
+  async pressKeyboard(button: string) {
+    await this.page.keyboard.press(button);
   }
 
-  async scrollDown() {
-    await this.page.evaluate(() => {
-      window.scrollTo(0, document.body.scrollHeight);
-    });
+  async verifyPageTitle(title: string) {
+    await this.page.waitForURL(process.env[`${title.toUpperCase()}_PAGE_URL`])
+
+    const pageTitle = await this.page.title();
+    expect(pageTitle).toContain(title);
   }
 
-  async waitForElementText(element: Locator, expectedText: string): Promise<boolean> {
+  async waitForElementTextVisible(element: Locator, expectedText: string): Promise<boolean> {
     const isTextMatch = async () => {
       if (!element) return false;
       const elementText = await element.innerText();
@@ -59,5 +60,13 @@ export default class PlaywrightWrapper {
     }
 
     return false;
+  }
+
+  async toCamelCase(input: string): Promise<string> {
+    return input
+      .toLowerCase()
+      .split(' ')
+      .map((word, index) => index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1))
+      .join('');
   }
 }
