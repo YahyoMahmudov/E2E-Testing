@@ -3,7 +3,7 @@ import { expect } from '@playwright/test';
 import basePage from '../../pages/basePage';
 
 Given('User passes the authorization on {string}', async function (page) {
-  const pageType = await basePage.wrapper.toCamelCase(page);
+  const [pageType] = await basePage.wrapper.toCamelCase(page);
   await basePage[pageType].authorizeUser();
 
   const isPageTitleCorrect = await basePage.wrapper.verifyPageTitle('Core Ad Manager');

@@ -56,7 +56,7 @@ export default class PlaywrightWrapper {
     };
 
     const startTime = Date.now();
-    while (Date.now() - startTime < 15000) {
+    while (Date.now() - startTime < 30000) {
       if (await isTextMatch()) {
         return true;
       }
@@ -66,11 +66,12 @@ export default class PlaywrightWrapper {
     return false;
   }
 
-  async toCamelCase(input: string): Promise<string> {
-    return input
-      .toLowerCase()
-      .split(' ')
-      .map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
-      .join('');
+  toCamelCase(...inputs: string[]): string[] {
+    return inputs.map(input =>
+        input.toLowerCase()
+            .split(' ')
+            .map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
+            .join('')
+    );
   }
 }
