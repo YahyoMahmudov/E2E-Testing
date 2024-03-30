@@ -14,8 +14,12 @@ When('User clicks {string} on {string}', async function (button, page) {
   await basePage.wrapper.waitAndClick(basePage[pageName][buttonName]);
 });
 
-When('User chooses {string} for {string}', async function (value, type) {
-  await basePage.reportsPage.selectReportOption(value, type);
+When('User chooses {string} for {string} on {string}', async function (option, dropdown, page) {
+  const optionName = await basePage.wrapper.toCamelCase(option);
+  const dropdownName = await basePage.wrapper.toCamelCase(dropdown);
+  const pageName = await basePage.wrapper.toCamelCase(page);
+  await basePage.wrapper.waitAndClick(basePage[pageName][dropdownName]);
+  await basePage.wrapper.waitAndClick(basePage[pageName][optionName]);
 });
 
 When('User enters {string} as {string} on {string}', async function (placeholder, input, page) {

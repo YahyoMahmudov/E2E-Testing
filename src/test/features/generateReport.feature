@@ -9,11 +9,11 @@ Background:
         Then User is in "Dashboard" page
         When User navigates to "Reports Tab" from "Dashboard Page"
         And User clicks "New Report Button" on "Reports Page"
-        And User chooses "Advertisers" for "Report Type"
+        And User clicks "Advertisers Button" on "Reports Page"
         And User enters "Report Name Input" as "New test automation report" on "Reports Page"
-        And User chooses "MM/DD/YYYY" for "Report Date" 
-        And User chooses "Direct" for "Export Option" 
-        And User chooses "week" for "Time Period" 
+        And User chooses "Month Day Year Option" for "Date Format Dropdown" on "Reports Page"
+        And User chooses "Last Week Option" for "Time Period Dropdown" on "Reports Page" 
+        And User chooses "Direct Option" for "Export Option Dropdown" on "Reports Page" 
         And User clicks "Save Button" on "Reports Page"
         Then Report is generated 
 

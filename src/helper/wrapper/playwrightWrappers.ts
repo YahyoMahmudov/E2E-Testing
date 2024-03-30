@@ -37,11 +37,15 @@ export default class PlaywrightWrapper {
     await this.page.keyboard.press(button);
   }
 
-  async verifyPageTitle(title: string) {
-    await this.page.waitForURL(process.env[`${title.toUpperCase()}_PAGE_URL`])
+  async verifyPageTitle(title: string): Promise<boolean> {
+    try {
+      await this.page.waitForURL(process.env[`${title.toUpperCase()}_PAGE_URL`]);
 
-    const pageTitle = await this.page.title();
-    expect(pageTitle).toContain(title);
+      const pageTitle = await this.page.title();
+      return pageTitle.includes(title);
+    } catch (error) {
+      return false;
+    }
   }
 
   async waitForElementTextVisible(element: Locator, expectedText: string): Promise<boolean> {
@@ -66,7 +70,7 @@ export default class PlaywrightWrapper {
     return input
       .toLowerCase()
       .split(' ')
-      .map((word, index) => index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1))
+      .map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
       .join('');
   }
 }
