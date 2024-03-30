@@ -1,7 +1,7 @@
 import { Locator, Page, expect } from '@playwright/test';
 
 export default class PlaywrightWrapper {
-  constructor(private page: Page) { }
+  constructor(private page: Page) {}
 
   async goto(url: string) {
     await this.page.goto(url, {
@@ -55,23 +55,28 @@ export default class PlaywrightWrapper {
       return elementText.trim() === expectedText;
     };
 
-    const startTime = Date.now();
-    while (Date.now() - startTime < 30000) {
-      if (await isTextMatch()) {
-        return true;
-      }
-      await this.page.waitForTimeout(1000);
+    const timeout = 30000;
+    const interval = 1000;
+
+    let elapsedTime = 0;
+    while (elapsedTime < timeout) {
+        if (await isTextMatch()) {
+            return true;
+        }
+        await this.page.waitForTimeout(interval);
+        elapsedTime += interval;
     }
 
     return false;
   }
 
   toCamelCase(...inputs: string[]): string[] {
-    return inputs.map(input =>
-        input.toLowerCase()
-            .split(' ')
-            .map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
-            .join('')
+    return inputs.map((input) =>
+      input
+        .toLowerCase()
+        .split(' ')
+        .map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
+        .join('')
     );
   }
 }
