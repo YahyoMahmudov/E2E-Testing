@@ -1,7 +1,7 @@
 import { Locator, Page, expect } from '@playwright/test';
 
 export default class PlaywrightWrapper {
-  constructor(private page: Page) { }
+  constructor(private page: Page) {}
 
   async goto(url: string) {
     await this.page.goto(url, {
@@ -49,11 +49,12 @@ export default class PlaywrightWrapper {
   }
 
   toCamelCase(...inputs: string[]): string[] {
-    return inputs.map(input =>
-        input.toLowerCase()
-            .split(' ')
-            .map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
-            .join('')
+    return inputs.map((input) =>
+      input
+        .toLowerCase()
+        .split(' ')
+        .map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
+        .join('')
     );
   }
 }

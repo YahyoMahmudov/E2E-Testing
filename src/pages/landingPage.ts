@@ -8,5 +8,5 @@ export default class LandingPage {
     this.base = new PlaywrightWrapper(page);
   }
   getStartedButton = this.page.locator("(//span[text()='Get started'])[1]");
-  registerWithEmailButton  = this.page.locator("//span[text()=' Register with email ']");
+  registerWithEmailButton = this.page.locator("//span[text()=' Register with email ']");
 }

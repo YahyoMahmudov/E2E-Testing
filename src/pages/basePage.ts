@@ -11,7 +11,7 @@ class BasePage {
   authPage: AuthPage;
   loginPage: LoginPage;
   signUpPage: SignUpPage;
-  landingPage:LandingPage
+  landingPage: LandingPage;
 
   public createInstances(page: Page) {
     this.page = page;

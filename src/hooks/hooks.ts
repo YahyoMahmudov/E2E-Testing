@@ -8,7 +8,7 @@ let browser: Browser;
 let context: BrowserContext;
 
 setDefaultTimeout(120 * 1000);
-BeforeAll( async function () {
+BeforeAll(async function () {
   getEnv();
   browser = await invokeBrowser(false);
 });
