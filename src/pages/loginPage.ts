@@ -8,7 +8,6 @@ export default class LoginPage {
   constructor(private page: Page) {
     this.base = new PlaywrightWrapper(page);
   }
-
   logInBtn = this.page.locator("//a/span[text()='Log in']");
   emailInput = this.page.locator("//input[@name='email']");
   passwordInput = this.page.locator("//input[@name='password']");

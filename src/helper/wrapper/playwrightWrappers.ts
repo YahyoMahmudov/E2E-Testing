@@ -1,7 +1,7 @@
-import { Locator, Page } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 
 export default class PlaywrightWrapper {
-  constructor(private page: Page) {}
+  constructor(private page: Page) { }
 
   async goto(url: string) {
     await this.page.goto(url, {
@@ -24,11 +24,36 @@ export default class PlaywrightWrapper {
     });
     await locator.fill(word);
   }
+
   async navigateTo(link: string) {
     await Promise.all([this.page.waitForNavigation(), this.page.click(link)]);
   }
 
   async waitForUrl(link: string) {
     await this.page.waitForURL(link, { timeout: 30000 });
+  }
+
+  async pressKeyboard(button: string) {
+    await this.page.keyboard.press(button);
+  }
+
+  async verifyPageTitle(title: string): Promise<boolean> {
+    try {
+      await this.page.waitForURL(process.env[`${title.toUpperCase()}_PAGE_URL`]);
+
+      const pageTitle = await this.page.title();
+      return pageTitle.includes(title);
+    } catch (error) {
+      return false;
+    }
+  }
+
+  toCamelCase(...inputs: string[]): string[] {
+    return inputs.map(input =>
+        input.toLowerCase()
+            .split(' ')
+            .map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
+            .join('')
+    );
   }
 }
