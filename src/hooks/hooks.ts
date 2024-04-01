@@ -1,4 +1,4 @@
-import { Before, After, BeforeAll, AfterAll, Status, setDefaultTimeout } from '@cucumber/cucumber';
+import { Before, After, BeforeAll, AfterAll, setDefaultTimeout } from '@cucumber/cucumber';
 import { Browser, BrowserContext } from '@playwright/test';
 import { invokeBrowser } from '../helper/browsers/browserManager';
 import { getEnv } from '../helper/env/env';

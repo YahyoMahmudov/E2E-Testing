@@ -48,6 +48,28 @@ export default class PlaywrightWrapper {
     }
   }
 
+  async waitForElementTextVisible(element: Locator, expectedText: string): Promise<boolean> {
+    const isTextMatch = async () => {
+      if (!element) return false;
+      const elementText = await element.innerText();
+      return elementText.trim() === expectedText;
+    };
+
+    const timeout = 30000;
+    const interval = 1000;
+
+    let elapsedTime = 0;
+    while (elapsedTime < timeout) {
+        if (await isTextMatch()) {
+            return true;
+        }
+        await this.page.waitForTimeout(interval);
+        elapsedTime += interval;
+    }
+
+    return false;
+  }
+
   toCamelCase(...inputs: string[]): string[] {
     return inputs.map((input) =>
       input

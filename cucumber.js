@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   default: {
+    tags: '',
     formatOptions: {
       snippetInterface: 'async-await'
     },

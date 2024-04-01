@@ -10,3 +10,4 @@ export default class DashboardPage {
 
   reportsTab = this.page.locator("//i/following-sibling::span[.='Reports']");
 }
+
