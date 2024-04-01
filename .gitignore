@@ -9,5 +9,4 @@ node_modules/
 allure-results/
 allure-report
 .vscode/
-src\helper\env\.env
 /src/helper/env
