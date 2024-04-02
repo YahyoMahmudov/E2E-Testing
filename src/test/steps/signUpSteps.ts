@@ -2,11 +2,6 @@ import { When, Then } from '@cucumber/cucumber';
 import basePage from '../../pages/basePage';
 
 let randomNum;
-Then('User clicks {string} on {string}', async function (button, page) {
-  const [buttonName, pageName] = basePage.wrapper.toCamelCase(button, page);
-  await basePage.wrapper.waitAndClick(basePage[pageName][buttonName]);
-});
-
 Then('User fills {string} as {string} on {string}', async function (inputLocator, fillInput, page) {
   let gmail = fillInput;
   if (inputLocator.includes('Email Input')) {
