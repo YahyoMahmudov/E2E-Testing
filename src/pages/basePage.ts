@@ -8,7 +8,6 @@ import DashboardPage from './dashboardPage';
 import ReportsPage from './reportsPage';
 import CampaignWizardPage from './campaignWizardPage';
 
-
 class BasePage {
   page = null;
   wrapper: PlaywrightWrapper;

@@ -1,4 +1,4 @@
-import { expect, Page } from '@playwright/test';
+import { Page } from '@playwright/test';
 import PlaywrightWrapper from '../helper/wrapper/playwrightWrappers';
 
 export default class DashboardPage {
@@ -11,4 +11,3 @@ export default class DashboardPage {
   reportsTab = this.page.locator("//i/following-sibling::span[.='Reports']");
   createCampaignButton = this.page.locator("//button[.=' Create Campaign ']");
 }
-
