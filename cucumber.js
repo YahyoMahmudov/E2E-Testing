@@ -2,11 +2,11 @@ const path = require('path');
 
 module.exports = {
   default: {
-    tags: '@campaign',
+    tags: '',
     formatOptions: {
       snippetInterface: 'async-await'
     },
-    //format: [path.resolve(__dirname, 'reporter.js')],
+    format: [path.resolve(__dirname, 'reporter.js')],
 
     paths: ['src/test/features/'],
     dryRun: false,
