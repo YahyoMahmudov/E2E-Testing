@@ -7,12 +7,12 @@ Given('User passes the authorization on {string}', async function (page) {
   await basePage[pageType].authorizeUser();
 
   const isPageTitleCorrect = await basePage.wrapper.verifyPageTitle('Core Ad Manager');
-  expect(isPageTitleCorrect).not.toBe(false);
+  expect(isPageTitleCorrect).toBeTruthy();
 });
 
 Given('User is in {string} page', async function (pageTitle) {
   const isPageTitleCorrect = await basePage.wrapper.verifyPageTitle(pageTitle);
-  expect(isPageTitleCorrect).not.toBe(false);
+  expect(isPageTitleCorrect).toBeTruthy();
 });
 
 When('User logins as a {string}', async function (userRole: string) {

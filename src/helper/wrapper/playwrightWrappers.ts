@@ -22,20 +22,8 @@ export default class PlaywrightWrapper {
       state: 'visible',
       timeout: 30000
     });
-    await locator.fill(word);
-  }
 
-  async clearAndType(locator: Locator, word: string) {
-    await locator.waitFor({
-      state: 'visible',
-      timeout: 30000
-    });
-
-    const valueLength = (await locator.inputValue()).length;
-    for (let i = 0; i < valueLength; i++) {
-      await locator.press('Backspace');
-    }
-
+    await locator.clear();
     await locator.fill(word);
   }
 
@@ -54,6 +42,7 @@ export default class PlaywrightWrapper {
   async verifyPageTitle(title: string): Promise<boolean> {
     try {
       await this.page.waitForFunction(`document.title.includes('${title}')`, { timeout: 10000 });
+      return true;
     } catch (error) {
       return false;
     }

@@ -8,9 +8,8 @@ export default class CampaignWizardPage {
     this.base = new PlaywrightWrapper(page);
   }
 
-  directAdvertiserCompanyType = this.page.locator("//label/*[.=' Direct Advertiser ']");
+  advertiserType = this.page.locator("//label/*[.=' Direct Advertiser ']");
   companyNameInput = this.page.locator("//input[@name='select_advertiser']");
-  companyName = this.page.locator("//input[@name='select_advertiser']/..");
   campaignNameInput = this.page.locator("//input[@name='campaign_name']");
   ymCompany = this.page.locator("//li/*[.='YM']");
   nextButton = this.page.locator("//button[.=' Next ']");
