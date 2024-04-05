@@ -11,7 +11,7 @@ export default class CampaignWizardPage {
   advertiserType = this.page.locator("//label/*[.=' Direct Advertiser ']");
   companyNameInput = this.page.locator("//input[@name='select_advertiser']");
   campaignNameInput = this.page.locator("//input[@name='campaign_name']");
-  ymCompany = this.page.locator("//li/*[.='YM']");
+  ymCompany = this.page.locator("//li/*[.='YM Company']");
   nextButton = this.page.locator("//button[.=' Next ']");
   creativesCampaignType = this.page.locator("//div[.=' Creatives ']");
   displayCreativeCategory = this.page.locator("(//div[.=' Display '])[2]");

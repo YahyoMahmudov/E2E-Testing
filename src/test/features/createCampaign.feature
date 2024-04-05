@@ -1,14 +1,14 @@
 @campaign
-Feature: Report
+Feature: Campaign
 
 Background: 
  Given User passes the authorization on "Auth Page"
 
- Scenario: Generate a new report
+ Scenario: Create a new campaign
         Given User logins as a "admin"
         And User is in "Dashboard" page
         When User clicks "Create Campaign Button" on "Dashboard Page"
-        And User selects "YM" company for "Advertiser Type" on "Campaign Wizard Page"
+        And User selects "YM Company" for "Advertiser Type" on "Campaign Wizard Page"
         And User enters "Campaign Name Input" as "Test Automation Campaign" on "Campaign Wizard Page"
         And User clicks "Next Button" on "Campaign Wizard Page"
         And User clicks "Creatives Campaign Type" on "Campaign Wizard Page"
