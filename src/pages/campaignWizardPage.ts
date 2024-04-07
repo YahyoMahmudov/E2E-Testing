@@ -20,4 +20,12 @@ export default class CampaignWizardPage {
   addCreativeLaterButton = this.page.locator("//button[.=' Add Creative Later ']");
   poNumberInput = this.page.locator("//input[@name='po_number']");
   checkoutButton = this.page.locator("//button[.=' Checkout ']");
+
+  async selectCompany(name:string) {
+    const companyName = this.page.locator(`//li/*[.='${name}']`)
+    await this.base.waitAndClick(this.companyNameInput) 
+    await this.base.type(this.companyNameInput, name);
+    await this.base.pressKeyboard('Enter');
+    await this.base.waitAndClick(companyName);
+  }
 }
