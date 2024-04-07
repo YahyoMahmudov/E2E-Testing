@@ -1,7 +1,9 @@
 import { Locator, Page, expect } from '@playwright/test';
 
 export default class PlaywrightWrapper {
-  constructor(private page: Page) {}
+  constructor(private page: Page) {
+    this.page = page;
+  }
 
   async goto(url: string) {
     await this.page.goto(url, {
@@ -10,6 +12,8 @@ export default class PlaywrightWrapper {
   }
 
   async waitAndClick(locator: Locator) {
+    await this.page.waitForLoadState('networkidle');
+
     await locator.waitFor({
       state: 'visible',
       timeout: 30000
@@ -60,11 +64,11 @@ export default class PlaywrightWrapper {
 
     let elapsedTime = 0;
     while (elapsedTime < timeout) {
-        if (await isTextMatch()) {
-            return true;
-        }
-        await this.page.waitForTimeout(interval);
-        elapsedTime += interval;
+      if (await isTextMatch()) {
+        return true;
+      }
+      await this.page.waitForTimeout(interval);
+      elapsedTime += interval;
     }
 
     return false;
