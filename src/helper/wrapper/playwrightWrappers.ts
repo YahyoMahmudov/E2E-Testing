@@ -1,7 +1,7 @@
 import { Locator, Page, expect } from '@playwright/test';
 
 export default class PlaywrightWrapper {
-  constructor(private page: Page) {}
+  constructor(private page: Page) { }
 
   async goto(url: string) {
     await this.page.goto(url, {
@@ -22,6 +22,8 @@ export default class PlaywrightWrapper {
       state: 'visible',
       timeout: 30000
     });
+
+    await locator.clear();
     await locator.fill(word);
   }
 
@@ -39,10 +41,8 @@ export default class PlaywrightWrapper {
 
   async verifyPageTitle(title: string): Promise<boolean> {
     try {
-      await this.page.waitForURL(process.env[`${title.toUpperCase()}_PAGE_URL`]);
-
-      const pageTitle = await this.page.title();
-      return pageTitle.includes(title);
+      await this.page.waitForFunction(`document.title.includes('${title}')`, { timeout: 10000 });
+      return true;
     } catch (error) {
       return false;
     }
@@ -60,11 +60,11 @@ export default class PlaywrightWrapper {
 
     let elapsedTime = 0;
     while (elapsedTime < timeout) {
-        if (await isTextMatch()) {
-            return true;
-        }
-        await this.page.waitForTimeout(interval);
-        elapsedTime += interval;
+      if (await isTextMatch()) {
+        return true;
+      }
+      await this.page.waitForTimeout(interval);
+      elapsedTime += interval;
     }
 
     return false;
