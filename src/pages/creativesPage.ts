@@ -26,11 +26,11 @@ export default class CreativesPage {
   async addNativeCreative(params:string){
     await this.base.waitAndClick(this.buildYourCreativeButton);
 
-    await this.fileUploadInput.setInputFiles("C:/Users/Admin/OneDrive/Pictures/coffee_logo.jpg");
+    await this.fileUploadInput.setInputFiles("img/logo.jpg");
     await this.base.waitForElementVisible(this.previewPage);
     await this.base.waitAndClick(this.nextButton);
 
-    await this.fileUploadInput.setInputFiles("C:/Users/Admin/OneDrive/Pictures/main_page.jpg");
+    await this.fileUploadInput.setInputFiles("img/main.jpg");
     await this.base.waitForElementVisible(this.previewPage);
     await this.base.waitAndClick(this.nextButton);
 
