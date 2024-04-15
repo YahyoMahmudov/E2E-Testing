@@ -14,7 +14,7 @@ export default class CampaignWizardPage {
   ymCompany = this.page.locator("//li/*[.='YM Company']");
   nextButton = this.page.locator("//button[.=' Next ']");
   creativesCampaignType = this.page.locator("//div[.=' Creatives ']");
-  displayCreativeCategory = this.page.locator("(//div[.=' Display '])[2]");
+  displayCreativeCategory = this.page.locator("//label[contains(@data-element, 'Creatives')]//*[.=' Display ']");
   yahyaTestProduct = this.page.locator("//h3[.=' Yahya_Test ']");
   totalBudgetInput = this.page.locator("//input[@placeholder='Add Budget']");
   addCreativeLaterButton = this.page.locator("//button[.=' Add Creative Later ']");
