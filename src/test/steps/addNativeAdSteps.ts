@@ -1,10 +1,12 @@
-import { When } from '@cucumber/cucumber';
+import { When, Then } from '@cucumber/cucumber';
 import basePage from '../../pages/basePage';
 
-When('User adds a new native creative and selects the following options for it', async function (params: string) {
-    const parameters = JSON.parse(params);
+When('User uploads {string} file to the native ad', async function (filePath) {
+    await basePage.creativesPage.uploadCreativeImage(filePath);
+});
 
-    await basePage.creativesPage.addNativeCreative(parameters);
+Then('New {string} is displayed on {string}', async function (element, page) {
+    const [elementName, pageName] = basePage.wrapper.toCamelCase(element, page);
 
-    await basePage.wrapper.waitForElementVisible(basePage.creativesPage.nativeCreative);
+    await basePage.wrapper.waitForElementVisible(basePage[pageName][elementName]);
 });

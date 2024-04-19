@@ -18,13 +18,14 @@ Background:
         And User enters "Total Budget Input" as "10" on "Campaign Wizard Page"
         And User clicks "Next Button" on "Campaign Wizard Page"
         And User clicks "New Creative Button" on "Creatives Page"
-        And User adds a new native creative and selects the following options for it
-        """
-        {
-            "Creative name": "Test creative",
-            "Destination url": "https://danads.com",
-            "Advertiser name": "Tester",
-            "Caption": "Test creative",
-            "Call To Action": "Learn More"
-        }
-        """
+        And User clicks "Build Your Creative Button" on "Creatives Page"
+        And User uploads "img/logo.jpg" file to the native ad
+        And User uploads "img/main.jpg" file to the native ad
+        And User enters "Creative Name Input" as "Test creative" on "Creatives Page"
+        And User enters "Destination Url Input" as "https://danads.com" on "Creatives Page"
+        And User enters "Advertiser Name Input" as "Test Advertiser" on "Creatives Page"
+        And User enters "Caption Input" as "Test creative" on "Creatives Page"
+        And User clicks "Call To Action Dropdown" on "Creatives Page"
+        And User clicks "Learn More Option" on "Creatives Page"
+        And User clicks "Complete Button" on "Creatives Page"
+        Then New "Native Creative" is displayed on "Creatives Page"

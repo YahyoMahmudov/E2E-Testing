@@ -17,33 +17,15 @@ export default class CreativesPage {
   advertiserNameInput = this.page.locator("//textarea[@name='AdvertiserName']");
   captionInput = this.page.locator("//textarea[@name='Caption']");
   callToActionDropdown = this.page.locator("//div[@data-test='CalltoactionType']");
-  learMoreOption = this.page.locator("//li[.='Learn More']");
+  learnMoreOption = this.page.locator("//li[.='Learn More']");
   completeButton = this.page.locator("//button[.='Complete']");
   nativeCreative = this.page.locator("//tr/td[.='Native']");
   creativesTab = this.page.locator("//div[@id='tab-creatives']");
   previewPage = this.page.locator("//div[@class='preview-layout tile-panel__col tile-panel__col--preview is-wide']");
 
-  async addNativeCreative(params:string){
-    await this.base.waitAndClick(this.buildYourCreativeButton);
-
-    await this.fileUploadInput.setInputFiles("img/logo.jpg");
+  async uploadCreativeImage(file:string){
+    await this.fileUploadInput.setInputFiles(file);
     await this.base.waitForElementVisible(this.previewPage);
     await this.base.waitAndClick(this.nextButton);
-
-    await this.fileUploadInput.setInputFiles("img/main.jpg");
-    await this.base.waitForElementVisible(this.previewPage);
-    await this.base.waitAndClick(this.nextButton);
-
-    const keys = Object.keys(params);
-    const actionValue = this.page.locator(`//li[.='${params[keys[4]]}']`);
-
-    await this.base.type(this.creativeNameInput, params[keys[0]]);
-    await this.base.type(this.destinationUrlInput, params[keys[1]]);
-    await this.base.type(this.advertiserNameInput, params[keys[2]]);
-    await this.base.type(this.captionInput, params[keys[3]]);
-    await this.base.waitAndClick(this.callToActionDropdown);
-    await this.base.waitAndClick(actionValue);
-
-    await this.base.waitAndClick(this.completeButton);
   }
 }
