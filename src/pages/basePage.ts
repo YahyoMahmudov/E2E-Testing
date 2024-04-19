@@ -7,6 +7,7 @@ import LandingPage from './landingPage';
 import DashboardPage from './dashboardPage';
 import ReportsPage from './reportsPage';
 import CampaignWizardPage from './campaignWizardPage';
+import CreativesPage from './creativesPage';
 
 class BasePage {
   page = null;
@@ -18,6 +19,7 @@ class BasePage {
   dashboardPage: DashboardPage;
   reportsPage: ReportsPage;
   campaignWizardPage: CampaignWizardPage;
+  creativesPage: CreativesPage;
 
   public createInstances(page: Page) {
     this.page = page;
@@ -29,6 +31,7 @@ class BasePage {
     this.dashboardPage = new DashboardPage(page);
     this.reportsPage = new ReportsPage(page);
     this.campaignWizardPage = new CampaignWizardPage(page);
+    this.creativesPage = new CreativesPage(page);
   }
 }
 

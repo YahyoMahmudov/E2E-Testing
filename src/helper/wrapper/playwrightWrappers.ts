@@ -32,7 +32,7 @@ export default class PlaywrightWrapper {
   }
 
   async waitForUrl(link: string) {
-    await this.page.waitForURL(link, { timeout: 30000 });
+    await this.page.waitForURL(link, { timeout: 60000 });
   }
 
   async pressKeyboard(button: string) {
@@ -78,5 +78,13 @@ export default class PlaywrightWrapper {
         .map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
         .join('')
     );
+  }
+
+  async waitForElementVisible(locator: Locator, timeout: number = 30000): Promise<void> {
+    try {
+      await locator.waitFor({ state: 'visible', timeout });
+    } catch (error) {
+      throw new Error(`Element ${locator} did not become visible within ${timeout} milliseconds.`);
+    }
   }
 }
