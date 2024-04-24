@@ -38,8 +38,8 @@ class BasePage {
     this.reportsPage = new ReportsPage(page);
     this.settingsPage = new SettingsPage(page);
     this.promoCodePage = new PromoCodePage(page);
-    this.campaignWizardPage = new CampaignWizardPage(page);
     this.campaignDetailsPage = new CampaignDetailsPage(page);
+    this.campaignWizardPage = new CampaignWizardPage(page);
     this.creativesPage = new CreativesPage(page);
   }
 }
