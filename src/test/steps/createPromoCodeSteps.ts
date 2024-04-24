@@ -2,6 +2,7 @@ import { When, Then, Given } from '@cucumber/cucumber';
 import { Locator, expect } from '@playwright/test';
 import basePage from '../../pages/basePage';
 import { getPromoCode, setPromoCode } from '../../pages/promoCodePage';
+import { dataUtil } from '../../utils/dateUtil';
 
 When('User selects {string} from {string} on {string}', async function (option, selectTab, page) {
   const [dropDownButton, pageName] = basePage.wrapper.toCamelCase(selectTab, page);
@@ -18,10 +19,10 @@ When('User named Promo code to {string} on {string}', async function (input, pag
 });
 
 When('User selects 1 day for Promo Code duration to {string} and {string} on {string}', async function (firstInput, secondInput, page) {
-  const datesInput = basePage.promoCodePage.setPromoCodeDates();
+  const date = dataUtil.getTodayFormatted();
   const [startDayInput, endDateInput, pageName] = basePage.wrapper.toCamelCase(firstInput, secondInput, page);
-  await basePage.wrapper.type(basePage[pageName][startDayInput], datesInput);
-  await basePage.wrapper.type(basePage[pageName][endDateInput], datesInput);
+  await basePage.wrapper.type(basePage[pageName][startDayInput], date);
+  await basePage.wrapper.type(basePage[pageName][endDateInput], date);
 });
 
 When('User select {string} from {string} on {string}', async function (option, list, page) {

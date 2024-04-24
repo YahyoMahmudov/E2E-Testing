@@ -36,11 +36,6 @@ export default class PromoCodePage {
     return `AU${new Date().valueOf().toString().substring(5)}`;
   }
 
-  setPromoCodeDates() {
-    const formattedToday = dataUtil.getTodayFormatted();
-    return formattedToday;
-  }
-
   async selectChannelsList(option: string) {
     const channelList = this.page.locator(`(//span[text()='${option}'])`);
     await this.base.waitAndClick(channelList);

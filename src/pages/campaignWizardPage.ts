@@ -23,7 +23,7 @@ export default class CampaignWizardPage {
 
   async selectCompany(name:string) {
     const companyName = this.page.locator(`//li/*[.='${name}']`)
-    await this.base.waitAndClick(this.companyNameInput) 
+    await this.base.waitAndClick(this.companyNameInput)
     await this.base.type(this.companyNameInput, name);
     await this.base.pressKeyboard('Enter');
     await this.base.waitAndClick(companyName);
