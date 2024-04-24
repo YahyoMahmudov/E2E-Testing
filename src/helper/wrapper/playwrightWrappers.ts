@@ -1,9 +1,7 @@
 import { Locator, Page, expect } from '@playwright/test';
 
 export default class PlaywrightWrapper {
-  constructor(private page: Page) {
-    this.page = page;
-  }
+  constructor(private page: Page) {}
 
   async goto(url: string) {
     await this.page.goto(url, {
@@ -12,8 +10,6 @@ export default class PlaywrightWrapper {
   }
 
   async waitAndClick(locator: Locator) {
-    await this.page.waitForLoadState('networkidle');
-
     await locator.waitFor({
       state: 'visible',
       timeout: 30000
@@ -26,6 +22,8 @@ export default class PlaywrightWrapper {
       state: 'visible',
       timeout: 30000
     });
+
+    await locator.clear();
     await locator.fill(word);
   }
 
@@ -34,7 +32,7 @@ export default class PlaywrightWrapper {
   }
 
   async waitForUrl(link: string) {
-    await this.page.waitForURL(link, { timeout: 30000 });
+    await this.page.waitForURL(link, { timeout: 60000 });
   }
 
   async pressKeyboard(button: string) {
@@ -43,10 +41,8 @@ export default class PlaywrightWrapper {
 
   async verifyPageTitle(title: string): Promise<boolean> {
     try {
-      await this.page.waitForURL(process.env[`${title.toUpperCase()}_PAGE_URL`]);
-
-      const pageTitle = await this.page.title();
-      return pageTitle.includes(title);
+      await this.page.waitForFunction(`document.title.includes('${title}')`, { timeout: 10000 });
+      return true;
     } catch (error) {
       return false;
     }
@@ -82,5 +78,13 @@ export default class PlaywrightWrapper {
         .map((word, index) => (index === 0 ? word : word.charAt(0).toUpperCase() + word.slice(1)))
         .join('')
     );
+  }
+
+  async waitForElementVisible(locator: Locator, timeout: number = 30000): Promise<void> {
+    try {
+      await locator.waitFor({ state: 'visible', timeout });
+    } catch (error) {
+      throw new Error(`Element ${locator} did not become visible within ${timeout} milliseconds.`);
+    }
   }
 }

@@ -8,7 +8,9 @@ import DashboardPage from './dashboardPage';
 import ReportsPage from './reportsPage';
 import SettingsPage from './settingsPage';
 import PromoCodePage from './promoCodePage';
-import CampaignWizardPage from './campaignWizard';
+import CampaignDetailsPage from './campaignDetailsPage';
+import CampaignWizardPage from './campaignWizardPage';
+import CreativesPage from './creativesPage';
 
 class BasePage {
   page = null;
@@ -21,7 +23,9 @@ class BasePage {
   reportsPage: ReportsPage;
   settingsPage: SettingsPage;
   promoCodePage: PromoCodePage;
+  campaignDetailsPage: CampaignDetailsPage;
   campaignWizardPage: CampaignWizardPage;
+  creativesPage: CreativesPage;
 
   public createInstances(page: Page) {
     this.page = page;
@@ -33,8 +37,10 @@ class BasePage {
     this.dashboardPage = new DashboardPage(page);
     this.reportsPage = new ReportsPage(page);
     this.settingsPage = new SettingsPage(page);
-    this.promoCodePage = new PromoCodePage(page)
-    this.campaignWizardPage = new CampaignWizardPage(page)
+    this.promoCodePage = new PromoCodePage(page);
+    this.campaignWizardPage = new CampaignWizardPage(page);
+    this.campaignDetailsPage = new CampaignDetailsPage(page);
+    this.creativesPage = new CreativesPage(page);
   }
 }
 

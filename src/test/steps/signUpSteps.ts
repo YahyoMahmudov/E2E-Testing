@@ -14,7 +14,7 @@ Then('User fills {string} as {string} on {string}', async function (inputLocator
   await basePage.wrapper.type(basePage[pageName][placeholderName], gmail);
 });
 
-When('User chooses {string} from {string} on {string}', async function (option,selectTab, page) {
+When('User chooses {string} from {string} on {string}', async function (option, selectTab, page) {
   const [openList, pageName] = basePage.wrapper.toCamelCase(selectTab, page);
   await basePage.wrapper.waitAndClick(basePage[pageName][openList]);
   await basePage.wrapper.waitAndClick(basePage[pageName].selectOption(option));
