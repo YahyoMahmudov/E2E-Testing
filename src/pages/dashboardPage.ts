@@ -9,5 +9,7 @@ export default class DashboardPage {
   }
 
   reportsTab = this.page.locator("//i/following-sibling::span[.='Reports']");
+  settingsTab = this.page.locator("//li[@class='el-menu-item can_publisher_settings']//a[1]");
+  dashboardTab = this.page.locator("(//a[@data-element='link-layout-navigation-menu'])[1]");
   createCampaignButton = this.page.locator("//button[.=' Create Campaign ']");
 }
